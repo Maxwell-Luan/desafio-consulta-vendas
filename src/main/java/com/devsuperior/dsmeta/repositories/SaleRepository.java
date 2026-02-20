@@ -21,11 +21,12 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
 			countQuery = "SELECT count(obj) FROM Sale obj "
 					+ "WHERE UPPER(obj.seller.name) LIKE UPPER(CONCAT('%', :name, '%')) "
 					+ "AND obj.date BETWEEN :minDate AND :maxDate")
-	Page<SaleReportDTO> searchReport(Pageable pageable, String name, LocalDate minDate, LocalDate maxDate);	
+	Page<SaleReportDTO> searchReport(Pageable pageable, String name, LocalDate minDate, LocalDate maxDate);
 	
 	@Query(nativeQuery = true, value = "SELECT tb_seller.name, ROUND(SUM(tb_sales.amount), 1) AS total FROM tb_seller "
 			+ "INNER JOIN tb_sales ON tb_seller.id = tb_sales.seller_id "
 			+ "WHERE tb_sales.date BETWEEN :minDate AND :maxDate "
-			+ "GROUP BY tb_seller.id")
+			+ "GROUP BY tb_seller.id "
+			+ "ORDER BY tb_seller.name")
 	Page<SellerSummaryProjection> searchSummary(Pageable pageable, LocalDate minDate, LocalDate maxDate);
 }

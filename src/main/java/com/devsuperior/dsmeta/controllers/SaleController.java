@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.devsuperior.dsmeta.dto.SaleMinDTO;
 import com.devsuperior.dsmeta.dto.SaleReportDTO;
 import com.devsuperior.dsmeta.dto.SellerSummaryDTO;
-import com.devsuperior.dsmeta.projections.SellerSummaryProjection;
 import com.devsuperior.dsmeta.services.SaleService;
 
 @RestController
